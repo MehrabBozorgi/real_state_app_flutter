@@ -3,7 +3,7 @@ import 'package:real_state_app_flutter/const/colors.dart';
 import 'package:real_state_app_flutter/const/font_style.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import 'first_screen.dart';
+import 'bottom_nav_screen.dart';
 
 class IntroScreen extends StatefulWidget {
   const IntroScreen({super.key});
@@ -37,7 +37,7 @@ class _IntroScreenState extends State<IntroScreen> {
               onPressed: () {
                 Navigator.of(
                   context,
-                ).push(MaterialPageRoute(builder: (context) => FirstScreen()));
+                ).push(MaterialPageRoute(builder: (context) => BottomNavScreen()));
               },
               child: Text('Skip'),
             ),
@@ -72,7 +72,7 @@ class _IntroScreenState extends State<IntroScreen> {
               } else {
                 Navigator.of(
                   context,
-                ).push(MaterialPageRoute(builder: (context) => FirstScreen()));
+                ).push(MaterialPageRoute(builder: (context) => BottomNavScreen()));
               }
             },
             child: Text(

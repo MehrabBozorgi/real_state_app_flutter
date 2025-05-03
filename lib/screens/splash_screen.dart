@@ -5,6 +5,8 @@ import 'package:real_state_app_flutter/const/font_style.dart';
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
+  static const String screenName='/splash_screen';
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;

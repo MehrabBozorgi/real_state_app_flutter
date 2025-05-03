@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:real_state_app_flutter/const/colors.dart';
-import 'package:real_state_app_flutter/const/font_style.dart';
+import 'package:real_state_app_flutter/screens/splash_screen.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+import '../const/colors.dart';
+import '../const/font_style.dart';
+
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -32,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
           ///body
           Expanded(
-            flex: 2,
+            flex: 3,
             child: Container(
               padding: EdgeInsets.all(25),
               width: size.width,
@@ -48,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 spacing: 20,
                 children: [
                   Text(
-                    'Login',
+                    'Register',
                     style: getLargeTitleStyle(context, fontWeight: FontWeight.bold),
                   ),
 
@@ -67,10 +69,23 @@ class _LoginScreenState extends State<LoginScreen> {
                           TextFormField(
                             controller: emailController,
                             decoration: customDecoration(
-                              icon: Icons.email_outlined,
+                              icon: Icons.person_2_outlined,
                               iconColor: Colors.orange,
-                              label: 'email',
+                              label: 'username',
                               iconBackgroundColor: Colors.orange.shade100,
+                            ),
+
+                            validator: usernameValidator,
+                          ),
+
+                          Divider(),
+                          TextFormField(
+                            controller: emailController,
+                            decoration: customDecoration(
+                              icon: Icons.email_outlined,
+                              iconColor: Colors.green,
+                              label: 'email',
+                              iconBackgroundColor: Colors.green.shade100,
                             ),
 
                             validator: emailValidator,
@@ -93,7 +108,58 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-                  buttonSection(size),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: MyColors.primaryColor,
+                      fixedSize: Size(size.width * 0.8, 50),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                    ),
+
+                    onPressed: () {
+                      if (globalKey.currentState!.validate()) {
+
+
+
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => SplashScreen(),),);
+
+
+
+                        Navigator.of(context).pushNamed('routeName');
+
+
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('این یک اسنک‌بار است!'),
+                            backgroundColor: Colors.red,
+                            duration: Duration(seconds: 3),
+                            dismissDirection: DismissDirection.startToEnd,
+                            // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                            //  behavior: SnackBarBehavior.fixed,
+                            // action: SnackBarAction(
+                            //   label: 'Undo',
+                            //   textColor: Colors.white,
+                            //
+                            //   onPressed: () {
+                            //     // یک عملیات را برگردان (optional)
+                            //     ScaffoldMessenger.of(
+                            //       context,
+                            //     ).showSnackBar(SnackBar(content: Text('عملیات بازگردانده شد')));
+                            //   },
+                            // ),
+                          ),
+                        );
+                      }
+                    },
+                    child: Text(
+                      'Register',
+                      style: getBodyStyle(
+                        context,
+                        color: MyColors.lightColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
 
                   SizedBox(height: 30),
                   Row(
@@ -126,60 +192,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Row buttonSection(Size size) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        TextButton(
-          onPressed: () {},
-          child: Text('Forget Password?', style: getSmallBodyStyle(context)),
-        ),
-
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: MyColors.primaryColor,
-            fixedSize: Size(size.width * 0.35, 50),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-          ),
-
-          onPressed: () {
-            if (globalKey.currentState!.validate()) {
-            } else {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('این یک اسنک‌بار است!'),
-                  backgroundColor: Colors.red,
-                  duration: Duration(seconds: 3),
-                  dismissDirection: DismissDirection.startToEnd,
-                  // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                  //  behavior: SnackBarBehavior.fixed,
-                  // action: SnackBarAction(
-                  //   label: 'Undo',
-                  //   textColor: Colors.white,
-                  //
-                  //   onPressed: () {
-                  //     // یک عملیات را برگردان (optional)
-                  //     ScaffoldMessenger.of(
-                  //       context,
-                  //     ).showSnackBar(SnackBar(content: Text('عملیات بازگردانده شد')));
-                  //   },
-                  // ),
-                ),
-              );
-            }
-          },
-          child: Text(
-            'Login',
-            style: getBodyStyle(
-              context,
-              color: MyColors.lightColor,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
 
   InputDecoration customDecoration({
     required String label,
@@ -202,6 +214,18 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  String usernameValidator(String? value) {
+    if (value!.isEmpty) {
+      return 'Please enter your username';
+    }
+
+    if (value.length >= 20) {
+      return 'your username is too Long';
+    }
+
+
+    return 'username is not valid';
+  }
   String emailValidator(String? value) {
     if (value!.isEmpty) {
       return 'Please enter your email';

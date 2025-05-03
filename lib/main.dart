@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:real_state_app_flutter/screens/intro_screen.dart';
-import 'package:real_state_app_flutter/screens/login_screen.dart';
+import 'package:real_state_app_flutter/screens/bottom_nav_screen.dart';
 import 'package:real_state_app_flutter/screens/splash_screen.dart';
 
 void main() {
@@ -12,6 +11,28 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: MaterialApp(debugShowCheckedModeBanner: false, home: LoginScreen()));
+    return SafeArea(
+      child: MaterialApp(debugShowCheckedModeBanner: false,
+
+
+        home: BottomNavScreen(),
+
+        // initialRoute: SplashScreen.screenName,
+
+
+        // routes: {
+        //
+        // SplashScreen.screenName:(context)=>SplashScreen(),
+        //
+        //
+        //
+        // },
+
+
+
+      ),
+
+
+    );
   }
 }
