@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:real_state_app_flutter/const/colors.dart';
 import 'package:real_state_app_flutter/const/font_style.dart';
+import 'package:real_state_app_flutter/screens/bottom_nav_screen.dart';
+import 'package:real_state_app_flutter/screens/splash_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
-
+static const String screenName='/login_screen';
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -144,6 +146,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
           onPressed: () {
             if (globalKey.currentState!.validate()) {
+
+
+
+              Navigator.of(context).pushReplacementNamed(BottomNavScreen.screenName);
+
+
+
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
@@ -202,12 +211,12 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  String emailValidator(String? value) {
+  String? emailValidator(String? value) {
     if (value!.isEmpty) {
       return 'Please enter your email';
     }
 
-    if (value.length >= 20) {
+    if (value.length <= 20) {
       return 'your email is too Long';
     }
 
@@ -215,10 +224,10 @@ class _LoginScreenState extends State<LoginScreen> {
       return 'your email is not valid';
     }
 
-    return 'Email is not valid';
+    return null;
   }
 
-  String passwordValidator(String? value) {
+  String? passwordValidator(String? value) {
     if (value!.isEmpty) {
       return 'Please enter your password';
     }
@@ -227,6 +236,6 @@ class _LoginScreenState extends State<LoginScreen> {
       return 'your password is too short';
     }
 
-    return 'Password is not valid';
+    return null;
   }
 }

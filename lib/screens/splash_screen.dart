@@ -1,11 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:real_state_app_flutter/const/colors.dart';
 import 'package:real_state_app_flutter/const/font_style.dart';
+import 'package:real_state_app_flutter/screens/login_screen.dart';
 
-class SplashScreen extends StatelessWidget {
+import 'first_screen.dart';
+
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
-  static const String screenName='/splash_screen';
+  static const String screenName = '/splash_screen';
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(Duration(seconds: 3), () {
+      Navigator.of(context).pushNamed(LoginScreen.screenName);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +53,7 @@ class SplashScreen extends StatelessWidget {
           ),
 
           Padding(
-            padding:  EdgeInsets.only(top: 40),
+            padding: EdgeInsets.only(top: 40),
             child: Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,15 +96,12 @@ class SplashScreen extends StatelessWidget {
                       ),
                     ],
                   ),
+
                   ///section2
                   Text(
                     'Making dreams come to you',
-                    style: getLargeBodyStyle(
-                      context,
-                      color: MyColors.primaryColor,
-                    ),
+                    style: getLargeBodyStyle(context, color: MyColors.primaryColor),
                   ),
-
                 ],
               ),
             ),

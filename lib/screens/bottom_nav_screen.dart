@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:real_state_app_flutter/const/colors.dart';
 
+import 'first_screen.dart';
+
 int navIndex = 0;
 
 class BottomNavScreen extends StatefulWidget {
   const BottomNavScreen({super.key});
-
+static const String screenName='/bottom_nav_screen';
   @override
   State<BottomNavScreen> createState() => _BottomNavScreenState();
 }
 
 class _BottomNavScreenState extends State<BottomNavScreen> {
   List<Widget> screensList = [
-    Container(color: Colors.red),
+    FirstScreen(),
     Container(color: Colors.red),
     Container(color: Colors.blue),
     Container(color: Colors.purple),
@@ -22,7 +24,6 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:  MyColors.primaryColorLight,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
